@@ -3,14 +3,50 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lg.entity.mappers.AuthorMapper">
-    <select id="findAll"  resultType="Author">
-        <![CDATA[
-            select * from Author
-        ]]>
+
+    <parameterMap id="selectAuthor" type="Author">
+        <parameter property="id"/>
+    </parameterMap>
+
+    <resultMap id="selectAuthor" type="Author">
+        <id column="id" property="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="bio" column="bio"/>
+        <result property="favouriteSection" column="favourite_section"/>
+    </resultMap>
+
+    <select id="selectAllAuthors" resultType="Author">
+        select * FROM author
     </select>
 
-    <select id="selectAuthor" parameterType="int" resultType="Author">
+    <select id="selectAllAuthorsSet" resultType="Author">
+        SELECT * FROM author
+    </select>
+
+    <select id="selectAllAuthorsVector" resultType="Author">
+        select * from author
+    </select>
+
+    <select id="selectAllAuthorsLinkedList" resultType="Author">
+        select * from author
+    </select>
+
+    <select id="selectAllAuthorsArray" resultType="Author">
+        select * from author
+    </select>
+
+   <!-- <select id="selectAuthor" parameterType="int" resultType="Author">
         SELECT * FROM Author WHERE ID = #{id}
+    </select>-->
+    <select id="selectAuthor" parameterMap="selectAuthor" resultMap="selectAuthor">
+        SELECT id,username,password,email,bio,favourite_section
+        from author WHERE id = ?
+    </select>
+
+    <select id="selectAuthorLinkedHashMap" parameterType="int" resultType="java.util.LinkedHashMap">
+        SELECT id,username FROM author WHERE id = #{value}
     </select>
 
     <insert id="insertAuthor" useGeneratedKeys="true" keyProperty="id">

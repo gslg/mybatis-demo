@@ -4,6 +4,7 @@ import com.lg.entity.Author;
 import com.lg.entity.mappers.AuthorMapper;
 import com.lg.factory.SqlSesstionUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.List;
  * Created by liuguo on 2017/3/27.
  */
 public class AuthorMapperTest {
-    public static void main(String[] args) {
+
+    @Test
+    public void testInsertAuthor(){
         SqlSession sqlSession = SqlSesstionUtil.openSqlSession();
         try {
 
@@ -44,4 +47,18 @@ public class AuthorMapperTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void testSelectAuthor(){
+        int id = 110;
+        SqlSession sqlSession = SqlSesstionUtil.openSqlSession();
+        try {
+            AuthorMapper authorMapper =  sqlSession.getMapper(AuthorMapper.class);
+            Author author =  authorMapper.selectAuthor(id);
+            System.out.println(author);
+        }finally {
+            sqlSession.close();
+        }
+    }
+
 }
