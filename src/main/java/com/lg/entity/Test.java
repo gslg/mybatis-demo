@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by liuguo on 2017/3/24.
@@ -14,7 +15,7 @@ import java.io.InputStream;
 public class Test {
     public static void main(String[] args){
         try {
-            InputStream inputStream =  Resources.getResourceAsStream("config.xml");
+            InputStream inputStream =  Resources.getResourceAsStream("mybatis-config.xml");
 
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
@@ -23,6 +24,10 @@ public class Test {
             StudentMapper studentMapper = session.getMapper(StudentMapper.class);
             Student student = studentMapper.selectStudent(1);
 
+            List<Student> students = studentMapper.queryList(null);
+            for(Student student1 : students){
+                System.out.println(student1);
+            }
             //Student student =  session.selectOne("com.lg.entity.StudentMapper.selectStudent",1);
             System.out.println("student:"+student.getStudentName());
         } catch (IOException e) {

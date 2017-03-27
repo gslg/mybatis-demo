@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="conf.properties"/>
+    <settings>
+        <!--该配置影响的所有映射器中配置的缓存的全局开关,默认为true-->
+        <setting name="cacheEnabled" value="true"/>
+
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25"/>
+    </settings>
+   <!-- <typeAliases>
+        <typeAlias alias="Author" type="com.lg.entity.Author"/>
+        <typeAlias alias="Blog" type="com.lg.entity.Blog"/>
+        <typeAlias alias="Comment" type="com.lg.entity.Comment"/>
+        <typeAlias alias="Post" type="com.lg.entity.Post"/>
+        <typeAlias alias="Section" type="com.lg.entity.Section"/>
+        <typeAlias alias="Tag" type="com.lg.entity.Tag"/>
+    </typeAliases>-->
+    <typeAliases>
+        <package name="com.lg.entity"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/lg/entity/mapperxml/StudentMapper.xml"/>
+        <mapper resource="com/lg/entity/mapperxml/BlogMapper.xml"/>
+        <mapper resource="com/lg/entity/mapperxml/AuthorMapper.xml"/>
+    </mappers>
+</configuration>

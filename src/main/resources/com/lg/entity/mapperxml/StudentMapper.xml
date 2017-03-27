@@ -8,4 +8,10 @@
             select * from student where studentId = #{id}
         ]]>
     </select>
+    <select id="queryList" parameterType="String" resultType="com.lg.entity.Student">
+        SELECT * FROM STUDENT WHERE 1 = 1
+        <if test="name!=null and !&quot;&quot;.equals(name.trim()) ">
+            and NAME like '% #{name} %'
+        </if>
+    </select>
 </mapper>

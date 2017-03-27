@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lg.entity.mappers.AuthorMapper">
+    <select id="findAll"  resultType="Author">
+        <![CDATA[
+            select * from Author
+        ]]>
+    </select>
+
+    <select id="selectAuthor" parameterType="int" resultType="Author">
+        SELECT * FROM Author WHERE ID = #{id}
+    </select>
+
+    <insert id="insertAuthor" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO AUTHOR (username,password,email,bio) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.username},#{item.password},#{item.email},#{item.bio})
+        </foreach>
+    </insert>
+
+</mapper>
