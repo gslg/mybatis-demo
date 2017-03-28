@@ -61,4 +61,39 @@ public class AuthorMapperTest {
         }
     }
 
+    @Test
+    public void testUpdateAuthor(){
+        int id = 108;
+        SqlSession sqlSession = SqlSesstionUtil.openSqlSession();
+        try {
+            AuthorMapper authorMapper =  sqlSession.getMapper(AuthorMapper.class);
+            Author author =  authorMapper.selectAuthor(id);
+
+            author.setBio("hahha333");
+            author.setUsername("lgzzz");
+            author.setPassword("demo");
+            author.setEmail("lgzzz@163.com");
+
+            authorMapper.updateAuthor(author);
+
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testDeleteAuthor(){
+        int id = 107;
+        SqlSession session = SqlSesstionUtil.openSqlSession();
+
+        try {
+            AuthorMapper authorMapper = session.getMapper(AuthorMapper.class);
+            authorMapper.deleteAuthor(id);
+            session.commit();
+        } finally {
+            session.close();
+        }
+    }
+
 }

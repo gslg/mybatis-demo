@@ -56,4 +56,16 @@
         </foreach>
     </insert>
 
+    <update id="updateAuthor" parameterType="Author">
+        UPDATE author SET username = #{username},
+        password = #{password},
+        email = #{email},
+        bio = #{bio}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteAuthor" parameterType="int">
+        DELETE FROM author WHERE id = #{id}
+    </delete>
+
 </mapper>
