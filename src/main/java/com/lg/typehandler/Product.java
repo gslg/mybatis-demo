@@ -21,10 +21,12 @@ public class Product {
 
     public Product() {
         super();
+        log.debug("Called Default Constructor");
     }
 
     public Product(ProductId id, String name) {
         super();
+        log.debug("Called Constructor Product(ProductId id, String name)");
         this.id = id;
         this.name = name;
     }

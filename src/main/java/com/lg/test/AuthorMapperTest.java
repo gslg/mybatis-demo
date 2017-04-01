@@ -50,12 +50,33 @@ public class AuthorMapperTest {
 
     @Test
     public void testSelectAuthor(){
-        int id = 110;
+        int id = 109;
         SqlSession sqlSession = SqlSesstionUtil.openSqlSession();
         try {
             AuthorMapper authorMapper =  sqlSession.getMapper(AuthorMapper.class);
             Author author =  authorMapper.selectAuthor(id);
             System.out.println(author);
+
+            author.setUsername("lb");
+            authorMapper.updateAuthor(author);
+
+            Author author1 = authorMapper.selectAuthor(id);
+            System.out.println(author1);
+            /**
+             DEBUG [main] - ==>  Preparing: SELECT id,username,password,email,bio,favourite_section from author WHERE id = ?
+             DEBUG [main] - ==> Parameters: 109(Integer)
+             DEBUG [main] - <==      Total: 1
+             Author : 109 : ly : ly@qq.com
+             Author : 109 : ly : ly@qq.com
+             DEBUG [main] - ==>  Preparing: UPDATE author SET username = ?, password = ?, email = ?, bio = ? WHERE id = ?
+             DEBUG [main] - ==> Parameters: lb(String), ly(String), ly@qq.com(String), kkkkkkkkkkkkkk(String), 109(Integer)
+             DEBUG [main] - <==    Updates: 1
+             DEBUG [main] - Cache Hit Ratio [com.lg.entity.mappers.AuthorMapper]: 0.0
+             DEBUG [main] - ==>  Preparing: SELECT id,username,password,email,bio,favourite_section from author WHERE id = ?
+             DEBUG [main] - ==> Parameters: 109(Integer)
+             DEBUG [main] - <==      Total: 1
+             Author : 109 : lb : ly@qq.com
+             */
         }finally {
             sqlSession.close();
         }

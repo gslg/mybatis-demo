@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lg.entity.mappers.AuthorMapper">
 
+    <cache readOnly="true"/>
+
     <parameterMap id="selectAuthor" type="Author">
         <parameter property="id"/>
     </parameterMap>

@@ -45,6 +45,9 @@ public class TypeHandlerTest {
         sqlSessionFactory.getConfiguration().addMapper(Mapper.class);
     }
 
+    /**
+     * 测试查询用户
+     */
     @Test
     public void shouldGetUser(){
         addMapper();
@@ -62,6 +65,9 @@ public class TypeHandlerTest {
         }
     }
 
+    /**
+     * 测试自动生成主键
+     */
     @Test
     public void shouldApplyTypeHandlerOnGeneratedKey(){
         addMapper();
@@ -81,6 +87,88 @@ public class TypeHandlerTest {
             session.close();
         }
     }
+
+    @Test
+    public void shoudApplyTypeHandlerOnSetNonNullParameter(){
+        addMapper();
+        SqlSession session = sqlSessionFactory.openSession();
+
+        try {
+            Mapper mapper = session.getMapper(Mapper.class);
+
+            Product product = new Product();
+            Product.ProductId id = new Product.ProductId();
+            id.setValue(10);
+            product.setId(id);
+            product.setName("zzzz");
+            /**
+             * 会打印日志: set ProductId:10,因为ProductId不为null，所以会经过Prodcut$ProductIdTypeHandler.setNonNullParameter
+             */
+            mapper.insertProduct2(product);
+
+        }finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void shouldApplyTypeHandlerWithJdbcTypeSpecified(){
+        addMapper();
+        SqlSession session = sqlSessionFactory.openSession();
+
+        try {
+            Mapper mapper = session.getMapper(Mapper.class);
+
+            Product product = mapper.getProductByName("ipad");
+
+            assertEquals(Integer.valueOf(2),product.getId().getValue());
+        }finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void shouldApplyTypeHandlerOnReturnTypeWithJdbcTypeSpecified(){
+        addMapper();
+        SqlSession session = sqlSessionFactory.openSession();
+
+        try {
+            Mapper mapper = session.getMapper(Mapper.class);
+
+            Product.ProductId productId = mapper.getProductIdByName("ipad");
+
+            assertEquals(Integer.valueOf(2),productId.getValue());
+        }finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void shouldPickSoleTypeHandlerOnXmlResultMap() throws Exception {
+        addMapper();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            Mapper mapper = sqlSession.getMapper(Mapper.class);
+            Product product = mapper.getProductByNameXml("iPad");
+            assertEquals(Integer.valueOf(2), product.getId().getValue());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void shouldApplyTypeHandlerUsingConstructor() throws Exception {
+        addMapper();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            Mapper mapper = sqlSession.getMapper(Mapper.class);
+            Product product = mapper.getProductByNameUsingConstructor("iPad");
+            assertEquals(Integer.valueOf(2), product.getId().getValue());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
 
 
 
