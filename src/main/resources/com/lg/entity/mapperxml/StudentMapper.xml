@@ -3,12 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lg.entity.StudentMapper">
+    <cache readOnly="true"/>
+    <update id="updateStudent">
+        UPDATE student SET studentAge=#{studentAge} where studentId=#{studentId}
+    </update>
     <select id="selectStudent" parameterType="int" resultType="com.lg.entity.Student">
         <![CDATA[
             select * from student where studentId = #{id}
         ]]>
     </select>
-    <select id="queryList" parameterType="String" resultType="com.lg.entity.Student">
+    <select id="queryList" parameterType="string" resultType="com.lg.entity.Student">
         SELECT * FROM STUDENT WHERE 1 = 1
         <if test="name!=null and !&quot;&quot;.equals(name.trim()) ">
             and NAME like '% #{name} %'

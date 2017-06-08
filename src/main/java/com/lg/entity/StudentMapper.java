@@ -9,4 +9,6 @@ public interface StudentMapper {
     Student selectStudent(int id);
 
     List<Student> queryList(String name);
+
+    void updateStudent(Student student);
 }
