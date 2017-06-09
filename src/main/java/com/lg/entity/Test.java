@@ -1,5 +1,6 @@
 package com.lg.entity;
 
+import com.lg.entity.mappers.StudentMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,7 +29,7 @@ public class Test {
             for(Student student1 : students){
                 System.out.println(student1);
             }
-            //Student student =  session.selectOne("com.lg.entity.StudentMapper.selectStudent",1);
+            //Student student =  session.selectOne("com.lg.entity.mappers.StudentMapper.selectStudent",1);
             System.out.println("student:"+student.getStudentName());
         } catch (IOException e) {
             e.printStackTrace();

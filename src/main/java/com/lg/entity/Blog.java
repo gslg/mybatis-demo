@@ -6,7 +6,7 @@ package com.lg.entity;
 import org.apache.ibatis.type.Alias;
 
 import java.util.List;
-@Alias("blog")
+@Alias("Blog")
 public class Blog {
 
     private int id;

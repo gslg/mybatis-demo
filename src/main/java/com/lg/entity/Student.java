@@ -1,8 +1,11 @@
 package com.lg.entity;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * Created by liuguo on 2017/3/23.
  */
+@Alias("Student")
 public class Student {
     private int studentId;
     private String studentName;

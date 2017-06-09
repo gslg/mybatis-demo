@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lg.entity.mappers.PostMapper">
+<!--
+    <resultMap id="PostMap" type="Post">
+        <id column="id" property="id"/>
+        <result column="blog_id" property="blog"/>
+        <result column="created_on" property="createdOn"/>
+        <result column="section" property="section"/>
+    </resultMap>-->
+    <select id="selectPostIn" resultType="Post">
+        SELECT *FROM  post WHERE id IN
+        <foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

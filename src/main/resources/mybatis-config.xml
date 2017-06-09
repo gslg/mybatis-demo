@@ -24,7 +24,7 @@
         <typeAlias alias="Section" type="com.lg.entity.Section"/>
         <typeAlias alias="Tag" type="com.lg.entity.Tag"/>
     </typeAliases>-->
-    <typeAliases>
+   <!-- <typeAliases>
         <package name="com.lg.entity"/>
     </typeAliases>
     <environments default="development">
@@ -42,5 +42,6 @@
         <mapper resource="com/lg/entity/mapperxml/StudentMapper.xml"/>
         <mapper resource="com/lg/entity/mapperxml/BlogMapper.xml"/>
         <mapper resource="com/lg/entity/mapperxml/AuthorMapper.xml"/>
-    </mappers>
+        <mapper resource="com/lg/entity/mapperxml/PostMapper.xml"/>
+    </mappers>-->
 </configuration>

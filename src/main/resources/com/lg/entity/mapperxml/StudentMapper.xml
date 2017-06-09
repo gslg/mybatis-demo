@@ -2,20 +2,68 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lg.entity.StudentMapper">
+<mapper namespace="com.lg.entity.mappers.StudentMapper">
     <cache readOnly="true"/>
-    <update id="updateStudent">
-        UPDATE student SET studentAge=#{studentAge} where studentId=#{studentId}
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="studentId">
+        INSERT INTO student VALUES (null,#{studentName},#{studentAge},#{studentPhone})
+    </insert>
+
+    <update id="updateStudent" parameterType="Student">
+        UPDATE student
+        <!--这里注意每句后面的,号,如果没有会sql报错,不用担心多余的逗号,mybatis会帮我们去掉多余的-->
+        <set>
+            <if test="studentName != null">
+                studentName = #{studentName},
+            </if>
+            <if test="studentAge != 0">
+                studentAge = #{studentAge},
+            </if>
+            <if test="studentPhone !=null">
+                studentPhone = #{studentPhone},
+            </if>
+        </set>
+        where studentId = #{studentId}
     </update>
-    <select id="selectStudent" parameterType="int" resultType="com.lg.entity.Student">
+
+    <select id="selectStudent" parameterType="int" resultType="Student">
         <![CDATA[
             select * from student where studentId = #{id}
         ]]>
     </select>
-    <select id="queryList" parameterType="string" resultType="com.lg.entity.Student">
+
+    <!--Mybatis默认采用ONGL解析参数，所以会自动采用对象树的形式取string.name，引起报错。
+    也可以public List queryList(@Param(value="name") String name)的方法说明参数值-->
+
+    <select id="queryList" parameterType="string" resultType="Student">
         SELECT * FROM STUDENT WHERE 1 = 1
-        <if test="name!=null and !&quot;&quot;.equals(name.trim()) ">
-            and NAME like '% #{name} %'
+        <!--对于参数直接是string类型的，不管参数名是什么，统一用_parameter代替,
+        否则There is no getter for property named 'name' in 'class java.lang.String'-->
+
+        <if test="_parameter!=null and !&quot;&quot;.equals(_parameter.trim()) ">
+            and studentName like '%${_parameter}%'
         </if>
     </select>
+
+    <select id="queryList2" resultType="com.lg.entity.Student">
+        SELECT * FROM STUDENT WHERE 1 = 1
+        <!--对于参数直接是string类型的，不管参数名是什么，统一用_parameter代替,或者可以使用@param注解-->
+
+        <if test="name!=null and !&quot;&quot;.equals(name.trim()) ">
+            and studentName like '%${name}%'
+        </if>
+    </select>
+
+    <select id="selectWithCondition" parameterType="Student" resultType="Student">
+        SELECT * from student
+        <where>
+          <if test="studentName != null and !&quot;&quot;.equals(studentName.trim())">
+             studentName LIKE  '%${studentName}%'
+          </if>
+            <if test="studentAge != 0">
+                and studentAge = #{studentAge}
+            </if>
+        </where>
+    </select>
+
+
 </mapper>
