@@ -53,6 +53,11 @@
 
     <insert id="insertAuthor" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO AUTHOR (username,password,email,bio) VALUES
+        (#{username},#{password},#{email},#{bio})
+    </insert>
+
+    <insert id="insertAuthor2" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO AUTHOR (username,password,email,bio) VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.username},#{item.password},#{item.email},#{item.bio})
         </foreach>

@@ -34,7 +34,7 @@ public interface AuthorMapper {
 
     void insertAuthor(Author author);
 
-    void insertAuthor(List<Author> authors);
+    void insertAuthor2(List<Author> authors);
 
     int deleteAuthor(int id);
 

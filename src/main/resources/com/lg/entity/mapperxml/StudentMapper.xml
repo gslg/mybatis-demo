@@ -8,6 +8,15 @@
         INSERT INTO student VALUES (null,#{studentName},#{studentAge},#{studentPhone})
     </insert>
 
+    <!--批量插入-->
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="studentId">
+        INSERT INTO student (studentName,studentAge,studentPhone) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.studentName},#{item.studentAge},#{item.studentPhone})
+        </foreach>
+
+    </insert>
+
     <update id="updateStudent" parameterType="Student">
         UPDATE student
         <!--这里注意每句后面的,号,如果没有会sql报错,不用担心多余的逗号,mybatis会帮我们去掉多余的-->

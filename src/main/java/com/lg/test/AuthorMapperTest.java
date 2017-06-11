@@ -39,7 +39,7 @@ public class AuthorMapperTest {
             List<Author> authors = new ArrayList<Author>();
             authors.add(author1);
             authors.add(author2);
-            authorMapper.insertAuthor(authors);
+            authorMapper.insertAuthor2(authors);
 
             sqlSession.commit();
 

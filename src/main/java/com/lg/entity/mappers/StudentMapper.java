@@ -21,4 +21,6 @@ public interface StudentMapper {
 
     void insertStudent(Student student);
 
+    void batchInsert(List<Student> students);
+
 }

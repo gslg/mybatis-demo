@@ -16,7 +16,7 @@
         <setting name="defaultStatementTimeout" value="25"/>
         <setting name="logImpl" value="log4J"/>
     </settings>
-   <!-- <typeAliases>
+  <!-- <typeAliases>
         <typeAlias alias="Author" type="com.lg.entity.Author"/>
         <typeAlias alias="Blog" type="com.lg.entity.Blog"/>
         <typeAlias alias="Comment" type="com.lg.entity.Comment"/>
@@ -24,10 +24,10 @@
         <typeAlias alias="Section" type="com.lg.entity.Section"/>
         <typeAlias alias="Tag" type="com.lg.entity.Tag"/>
     </typeAliases>-->
-   <!-- <typeAliases>
+   <typeAliases>
         <package name="com.lg.entity"/>
     </typeAliases>
-    <environments default="development">
+    <!--<environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">

@@ -24,6 +24,13 @@ public class Student {
         this.studentPhone = studentPhone;
     }
 
+    public Student(String studentName, int studentAge,
+                   String studentPhone) {
+        this.studentName = studentName;
+        this.studentAge = studentAge;
+        this.studentPhone = studentPhone;
+    }
+
     public int getStudentId() {
         return studentId;
     }
