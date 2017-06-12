@@ -30,7 +30,7 @@ public class StudentTest {
             StudentMapper studentMapper = session.getMapper(StudentMapper.class);
             Student student = studentMapper.selectStudent(1);
 
-            Student student2 = session.selectOne("com.lg.entity.mappers.StudentMapper.selectStudent",1);
+            Student student2 = session.selectOne("selectStudent",1);
 
             Assert.assertNotNull(student2);
 

@@ -10,4 +10,5 @@ import java.util.List;
 public interface BlogMapper {
     List<Blog> findAll();
     Blog selectBlog(int id);
+    Blog selectBlog2(int id);
 }

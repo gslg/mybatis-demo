@@ -9,8 +9,33 @@
         ]]>
     </select>
 
-    <select id="selectBlog" parameterType="int" resultType="Blog">
+    <!--嵌套关联查询 N+1问题-->
+    <resultMap id="BlogMap" type="Blog">
+        <id column="id" property="id"/>
+        <association property="author" column="author_id" select="com.lg.entity.mappers.AuthorMapper.selectAuthor"/>
+    </resultMap>
+
+    <resultMap id="BlogMap2" type="Blog" autoMapping="true">
+        <id column="id" property="id"/>
+        <association property="author" column="author_id"
+                     resultMap="com.lg.entity.mappers.AuthorMapper.selectAuthor" columnPrefix="a_"/>
+    </resultMap>
+
+    <select id="selectBlog" parameterType="int" resultMap="BlogMap">
         SELECT * FROM BLOG WHERE ID = #{id}
+    </select>
+
+    <select id="selectBlog2" parameterType="int" resultMap="BlogMap2">
+        SELECT blog.id,
+        title,
+        author_id,
+        author.id as a_id,
+        author.username as a_username,
+        author.password as a_password,
+        author.email as a_email,
+        author.bio as a_bio,
+        author.favourite_section as a_favourite_section
+        from blog,author as author WHERE  blog.id = #{id} and blog.author_id = author.id
     </select>
 
 </mapper>
