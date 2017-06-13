@@ -39,6 +39,24 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!--使用注解代替 <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.lg.entity.mappers.UserMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>-->
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+       <!-- <constructor-arg index="1" value="BATCH"/>-->
+    </bean>
+
+    <!--自动扫描装配Mapper接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--基本包-->
+        <property name="basePackage" value="com.lg.entity.mappers"/>
+        <!--要寻找的注解名称-->
+        <property name="annotationClass" value="com.lg.util.annotation.MyBatisMapper"/>
+    </bean>
+
     <!--注解配置-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:annotation-config/>

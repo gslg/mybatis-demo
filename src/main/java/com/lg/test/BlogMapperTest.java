@@ -40,4 +40,19 @@ public class BlogMapperTest {
 
         System.out.println(blog);
     }
+
+    @Test
+    public void testBlogDetail(){
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+        SqlSessionFactory sqlSessionFactory = applicationContext.getBean("sqlSessionFactory",SqlSessionFactory.class);
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        BlogMapper blogMapper = sqlSession.getMapper(BlogMapper.class);
+
+        Blog blog = blogMapper.selectBlogDetails(1);
+        System.out.println(blog);
+
+         blog.getPosts().forEach(System.out::println);
+    }
 }
