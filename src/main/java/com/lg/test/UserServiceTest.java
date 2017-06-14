@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liuguo on 2017/6/13.
@@ -39,5 +41,17 @@ public class UserServiceTest {
         users.add(new User(5,"cc","江苏","IN"));
 
         userDao.insertUsers(users);
+    }
+
+    @Test
+    public void testMap(){
+        Map<String,Integer> map = new HashMap<>();
+
+        for (int i = 0; i < 3; i++) {
+            map.merge("count",2,(oldValue,value)->oldValue+value);
+            System.out.println(map.get("count"));
+        }
+
+        System.out.println(map.get("count"));
     }
 }

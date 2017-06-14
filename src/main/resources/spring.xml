@@ -57,6 +57,10 @@
         <property name="annotationClass" value="com.lg.util.annotation.MyBatisMapper"/>
     </bean>
 
+    <bean id="lifeCyclebean" class="com.lg.util.CustomLifecycleBean" init-method="init" destroy-method="end">
+        <property name="name" value="hello"/>
+    </bean>
+
     <!--注解配置-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:annotation-config/>
